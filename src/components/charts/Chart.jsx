@@ -21,11 +21,12 @@ export default function Chart() {
   // get input
   const [base, setBase] = React.useState()
   const [quote, setQuote] = React.useState()
+  const [dataKey1, setDataKey1] = React.useState()
+  const [dataKey2, setDataKey2] = React.useState()
   const handSub = (e) => {
     e.preventDefault()
-    // setQuote(quote)
-    // setBase(base)
-    console.log(base, quote)
+    setDataKey1(base)
+    setDataKey2(quote)
   }
   return (
     <>
@@ -33,20 +34,34 @@ export default function Chart() {
         <div className="bgBlue">
           <form onSubmit={handSub}>
             <div className="inputForm">
+              <label className="labelItems"> Devise</label>
               <input
                 className=" form-control w-25 mx-5"
                 type="text"
-                placeholder="Base asset "
+                placeholder="Devise "
                 value={base}
                 onChange={(e) => setBase(e.target.value)}
               />
-              <input
+
+              <label className="labelItems"> Situation</label>
+              <select
                 className="form-control w-25"
                 type="text"
-                placeholder="Quote asset "
                 value={quote}
                 onChange={(e) => setQuote(e.target.value)}
-              />
+              >
+                <option value="">--Please choose an Situation--</option>
+                {dataCharts.map((item) => {
+                  // repetition
+                  return [...new Set(Object.keys(item))].map((key) => {
+                    return (
+                      <option key="bitcoin" value={key}>
+                        {key}
+                      </option>
+                    )
+                  })
+                })}
+              </select>
               <button className="btn btn-AddChart">Add Chart</button>
             </div>
           </form>
@@ -59,12 +74,12 @@ export default function Chart() {
           <div className="chart">
             <AreaChart width={1000} height={400} data={dataCharts}>
               <CartesianGrid strokeDasharray="3 9" />
-              <XAxis dataKey={base} />
+              <XAxis dataKey={dataKey1} />
               <YAxis />
               <Tooltip />
               <Area
                 type="monotone"
-                dataKey={quote}
+                dataKey={dataKey2}
                 stroke="#0066ff"
                 fill="#86b7fe"
               />
