@@ -1,12 +1,15 @@
-import React from 'react';
-import "./Topbar.css";
+import React from 'react'
+import './Topbar.css'
 
 export default function Topbar() {
-    return (
-        <div className="topbar">
-            <div className="topbarWrapper">
-                <div className="topLeft"> <span className="logo">Chart-SunZuLab</span></div>
-            </div>
+  return (
+    <div className="topbar">
+      <div className="topbarWrapper">
+        <div className="topLeft">
+          {' '}
+          <span className="logo">Chart</span>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
